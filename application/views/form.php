@@ -1,6 +1,6 @@
 <html>  
  <head>  
-   <title>CodeIgnitor</title>  
+   <title>CodeIgniter</title>  
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />  
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>  
  </head>  
@@ -12,13 +12,14 @@
       <form method="post" action="<?php echo base_url()?>main/form_validation">  
       
            <?php 
-           $this->load->library('form_validation'); // <---- HERE
- 
+           $this->load->library('form_validation'); 
+          // Ici uri correspond au router il redirige vers inserted pour afficher les informations que vous venez d'inserer en passant par le formulaire
            if($this->uri->segment(2) == "inserted")  
            {  
        
                 echo '<p class="text-success">Votre patient est bien ajouté</p>';  
            }  
+          // Ici uri correspond au router il redirige vers updated pour afficher les informations que vous venez de modifier
            if($this->uri->segment(2) == "updated")  
            {  
                 echo '<p class="text-success">Data mise à jour</p>';  
@@ -96,7 +97,7 @@
            <?php  
            }  
            ?>  
-      </form>  
+      </form>
       <br /><br />  
       <h3>Listes des patients</h3><br />  
       <div class="table-responsive">  
@@ -112,6 +113,8 @@
                      <th>Modifier</th>  
                 </tr>  
            <?php  
+
+           // Ici vous avez le tableau qui afficher les données des patients récuperées de votre base de donnée. 
            if($fetch_data->num_rows() > 0)  
            {  
                 foreach($fetch_data->result() as $row)  
@@ -142,10 +145,11 @@
            </table>  
       </div>  
       <script>  
+      // Ici vous avez les conditions d'affichage pour votre suppression de données. 
       $(document).ready(function(){  
            $('.delete_data').click(function(){  
                 var id = $(this).attr("id");  
-                if(confirm("Are you sure you want to delete this?"))  
+                if(confirm("Vous souhaitez supprimer ces données ?"))  
                 {  
                      window.location="<?php echo base_url(); ?>main/delete_data/"+id;  
                 }  

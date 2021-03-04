@@ -1,40 +1,47 @@
 <?php  
+
+// Ici vous créez votre model 
  class Main_model extends CI_Model  
  {  
       function test_main()  
       {  
            echo "This is model function";  
       }  
+
+     // Ici la fonction sert a insérer des données dans votre database. Celle que vous avez enregistrée dans votre fichier database.php
       function insert_data($data)  
       {  
            $this->db->insert("patients", $data);  
       }  
+
+      // Ici vous aller afficher toutes données de votre table patients. C'est le read de votre CRUD 
       function fetch_data()  
       {  
-           //$query = $this->db->get("tbl_user");  
-           //select * from tbl_user  
-           //$query = $this->db->query("SELECT * FROM tbl_user ORDER BY id DESC");  
            $this->db->select("*");  
            $this->db->from("patients");  
            $query = $this->db->get();  
            return $query;  
       }  
+
+      // Ici c'est une fonction pour supprimer les information du patient.  C'est le delete de votre CRUD
       function delete_data($id){  
            $this->db->where("id", $id);  
            $this->db->delete("patients");  
-           //DELETE FROM tbl_user WHERE id = $id  
       }  
+
+     //Ici la fonction sert a afficher un seul patient notamment pour pouvoir modifier les infos pour la suite. C'est le read de votre CRUD
       function fetch_single_data($id)  
       {  
            $this->db->where("id", $id);  
            $query = $this->db->get("patients");  
            return $query;  
-           //Select * FROM tbl_user where id = '$id'  
-      }  
+      } 
+      
+      // Ici c'est une fonction pour modifier les information du client. C'est le update de votre CRUD 
       function update_data($data, $id)  
       {  
            $this->db->where("id", $id);  
            $this->db->update("patients", $data);  
-           //UPDATE tbl_user SET first_name = '$first_name', last_name = '$last_name' WHERE id = '$id'  
+     
       }  
  }  
